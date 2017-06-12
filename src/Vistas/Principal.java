@@ -1,5 +1,6 @@
 package Vistas;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -89,6 +90,7 @@ public class Principal extends JFrame{
         solucion.setFont(new java.awt.Font("Poor Richard", 0, 14)); // NOI18N
         solucion.setRows(5);
         solucion.setEnabled(false);
+        solucion.setDisabledTextColor(Color.BLACK);
         jScrollPane1.setViewportView(solucion);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -150,7 +152,8 @@ public class Principal extends JFrame{
 
   //oyente para leer archivo de texto
     private void leerTextoActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:    	
+        // TODO add your handling code here:
+    	solucion.setText("");
     	lA.leerArchivo();
     	ArrayList<String[]> ciudades = lA.getCiudades();
     	solucion.append("Tamaño del cuadrado:  " + lA.getTamanoCuadrado()+"\n");
@@ -165,8 +168,10 @@ public class Principal extends JFrame{
   //oyente para el boton solucionar
     private void solucionarActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
+    	solucion.append("\n ... Solucionando .... \n");
 		SolucionModelo sM = new SolucionModelo();
-		sM.solucionar(lA);
+		solucion.append("La solución es: \n");
+		solucion.append(sM.solucionar(lA));
     }
     
     

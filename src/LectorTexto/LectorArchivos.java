@@ -95,8 +95,10 @@ public class LectorArchivos {
                         
                 fr.close();
                 bf.close();
-                } catch (IOException e2) {
-                        JOptionPane.showMessageDialog(null, "Error Al Cargar Archivo");
+                } catch (NumberFormatException exc) {
+                    JOptionPane.showMessageDialog(null, "Error en el formato de archivo de entrada");
+                }catch (IOException e2) {
+                    JOptionPane.showMessageDialog(null, "Error Al Cargar Archivo");
                 }
         }
         setTamanoCuadrado(tamañoCuadrado);

@@ -8,18 +8,10 @@ import lpsolve.LpSolveException;
 
 public class SolucionModelo {
 
-	public void solucionar(LectorArchivos archivo) {
+	public String solucionar(LectorArchivos archivo) {
 		// TODO Auto-generated method stub
-		for (int j = 0; j < archivo.getCiudades().size(); j++) {
-            String[] ciudad = archivo.getCiudades().get(j);
-            for(int i=0; i< ciudad.length; i++){
-            	String val = ciudad[i].toString();
-            	System.out.println("Element: " + val);
-            }
-            System.out.println("Element: " + Arrays.toString(ciudad));
-        }
 		int numeroVariables = (archivo.getNumeroCiudades() * 4)+2;
-		System.out.println(archivo.getNumeroCiudades()+"numero variables ");
+		String resultado = null;
 		try {
 			//creamos el problema con n*4+2 variables donde n= numero de ciudades
 			LpSolve solver = LpSolve.makeLp(0, numeroVariables);
@@ -28,7 +20,6 @@ public class SolucionModelo {
 			for (int i = 0; i < numeroVariables; i++) {
 				vacia += "0 ";
 			}
-			System.out.println(vacia);
 			StringBuilder restriccion1,restriccion2,restriccion3,restriccion4;
 			String ciudad[];
 			for(int i=0; i<archivo.getCiudades().size()*8;i+=8){
@@ -89,28 +80,27 @@ public class SolucionModelo {
 				FuncionObjetivo+="-1 ";
 			}
 			FuncionObjetivo+=" 0 0";
-			System.out.println(FuncionObjetivo);
-			
 			solver.strSetObjFn(FuncionObjetivo.toString()); // agregar funcion objetivo
-			
 			solver.printLp();
-			System.out.println("solucion");
-			System.out.println(solver.solve()); // si esto retorna 0 es porque sí encontró la solucion optima
 			
+			solver.solve(); // si esto retorna 0 es porque sí encontró la solucion optima
 			solver.printObjective();
 			solver.printSolution(1);
 			solver.printConstraints(1);
 			
 			double[] var = solver.getPtrVariables();
-			System.out.println("Solucion");
+			System.out.println("Solución Variables");
 			System.out.println("X = "+var[var.length-2]);
 			System.out.println("Y = "+var[var.length-1]);
-
+			resultado = "Valor de la función objetivo="+solver.getObjective()+"\nX ="+var[var.length-2]+"\nY ="+var[var.length-1];
+			solver.deleteLp();
 			
 		} catch (LpSolveException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			resultado = "Ha ocurrido un error, por favor revisar los datos de entrada";
 		}
+		return resultado;		
 	}
 
 }
