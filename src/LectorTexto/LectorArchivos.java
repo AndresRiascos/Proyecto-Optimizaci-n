@@ -15,10 +15,47 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class LectorArchivos {
 	
-	public ArrayList<String[]> leerArchivo(){
+	public int tamanoCuadrado;
+	public int numeroCiudades;
+	public ArrayList<String[]> ciudades;
+	
+	public LectorArchivos(){
+    }
+	
+	public LectorArchivos(int tC, int nC, ArrayList<String[]> cities){
+		tamanoCuadrado = tC;
+		numeroCiudades = nC;
+		ciudades = cities;
+    }
+	
+	public void setTamanoCuadrado(int n) { 
+		this.tamanoCuadrado = n; 
+	}
+	
+	public void setNumeroCiudades(int n){ 
+		this.numeroCiudades = n; 
+	}
+	
+	public void setCiudades(ArrayList<String[]> n){ 
+		this.ciudades = n; 
+	}
+	
+	public int getTamanoCuadrado() { 
+		return tamanoCuadrado; 
+	}
+	
+	public int getNumeroCiudades(){ 
+		return numeroCiudades;
+	}
+	
+	public ArrayList<String[]> getCiudades(){ 
+		return ciudades;
+	}
+	
+	public void leerArchivo(){
 		String texto;
-        int tamañoCuadrado;
-        int numeroCiudades;
+        int tamañoCuadrado = 0;
+        int numeroCiudades = 0;
         ArrayList<String[]> ciudades = new ArrayList<String[]>();
         
         String file = "";
@@ -54,12 +91,7 @@ public class LectorArchivos {
                         		ciudades.add(ciudad);                        		                        		
                         	}                                
                             i++;    
-                        }
-                        
-                        for (int j = 0; j < ciudades.size(); j++) {
-                            String[] value = ciudades.get(j);
-                            System.out.println("Element: " + Arrays.toString(value));
-                        }
+                        }                        
                         
                 fr.close();
                 bf.close();
@@ -67,7 +99,9 @@ public class LectorArchivos {
                         JOptionPane.showMessageDialog(null, "Error Al Cargar Archivo");
                 }
         }
-       return ciudades;
+        setTamanoCuadrado(tamañoCuadrado);
+        setNumeroCiudades(numeroCiudades);
+        setCiudades(ciudades);
     }
 
 }

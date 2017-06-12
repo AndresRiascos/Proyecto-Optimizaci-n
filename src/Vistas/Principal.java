@@ -1,10 +1,12 @@
 package Vistas;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import LectorTexto.LectorArchivos;
-
+import Logica.*;
 
 
 public class Principal extends JFrame{
@@ -20,6 +22,8 @@ public class Principal extends JFrame{
     private javax.swing.JButton solucionar;
     private javax.swing.JLabel titulo;
     // End of variables declaration  
+    
+    LectorArchivos lA = new LectorArchivos();
     
     public Principal() {
         initComponents();
@@ -146,16 +150,23 @@ public class Principal extends JFrame{
 
   //oyente para leer archivo de texto
     private void leerTextoActionPerformed(java.awt.event.ActionEvent evt) {                                          
-        // TODO add your handling code here:
-    	LectorArchivos lA = new LectorArchivos();
+        // TODO add your handling code here:    	
     	lA.leerArchivo();
+    	ArrayList<String[]> ciudades = lA.getCiudades();
+    	solucion.append("Tamaño del cuadrado:  " + lA.getTamanoCuadrado()+"\n");
+    	solucion.append("Número de ciudades:  " + lA.getNumeroCiudades()+"\n");
+    	for (int j = 0; j < ciudades.size(); j++) {
+            String[] value = ciudades.get(j);
+            solucion.append(Arrays.toString(value)+"\n");
+        }
     	solucionar.setEnabled(true);
     }
     
   //oyente para el boton solucionar
     private void solucionarActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-		
+		SolucionModelo sM = new SolucionModelo();
+		sM.solucionar(lA);
     }
     
     
