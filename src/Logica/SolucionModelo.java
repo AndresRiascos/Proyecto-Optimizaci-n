@@ -25,11 +25,13 @@ public class SolucionModelo {
 			LpSolve solver = LpSolve.makeLp(0, numeroVariables);
 			//añadimos las restricciones (4 por ciudad)
 			for(int i=0; i<archivo.getCiudades().size();i++){
-				//se deden de crear reetricciones así por cada ciudad
-				solver.strAddConstraint("1 -1 0 0 0 0 0 0 0 0 0 0 1 0", LpSolve.GE, 1);
-				solver.strAddConstraint("1 -1 0 0 0 0 0 0 0 0 0 0 -1 0", LpSolve.GE, -1);
-				solver.strAddConstraint("0 0 1 -1 0 0 0 0 0 0 0 0 0 1", LpSolve.GE, 9);
-				solver.strAddConstraint("0 0 1 -1 0 0 0 0 0 0 0 0 0 -1", LpSolve.GE, -9);
+				String ciudad[] = archivo.getCiudades().get(i);
+					//se deden de crear reetricciones así por cada ciudad
+				// basicamente por cada ciudad toca crear esas cuatro restricciones, teniendo en cuenta el numero de ciudades (abajo es de 3 por eso son 14 variables)
+					solver.strAddConstraint("1 -1 0 0 0 0 0 0 0 0 0 0 1 0", LpSolve.GE, Integer.parseInt(ciudad[1].toString()));
+					solver.strAddConstraint("1 -1 0 0 0 0 0 0 0 0 0 0 -1 0", LpSolve.GE, (Integer.parseInt(ciudad[1].toString())*-1));
+					solver.strAddConstraint("0 0 1 -1 0 0 0 0 0 0 0 0 0 1", LpSolve.GE, Integer.parseInt(ciudad[2].toString()));
+					solver.strAddConstraint("0 0 1 -1 0 0 0 0 0 0 0 0 0 -1", LpSolve.GE, (Integer.parseInt(ciudad[2].toString())*-1));
 			}
 			
 		} catch (LpSolveException e) {
