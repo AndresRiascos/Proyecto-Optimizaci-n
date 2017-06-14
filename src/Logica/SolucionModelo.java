@@ -1,6 +1,6 @@
 package Logica;
 
-import java.util.Arrays;
+
 
 import LectorTexto.LectorArchivos;
 import lpsolve.LpSolve;
