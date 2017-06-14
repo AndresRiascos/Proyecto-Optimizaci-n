@@ -1,0 +1,5 @@
+3
+3
+Palmira 0 0
+Cali 1 1
+Buga 2 2

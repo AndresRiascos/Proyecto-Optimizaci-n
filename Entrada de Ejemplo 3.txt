@@ -1,0 +1,12 @@
+100
+10
+Palmira 29 73
+Cali 11 96
+Buga 71 25
+Tuluá 5 38
+RioFrio 95 10
+Darien 87 20
+Obando 15 20
+Andalucia 60 21
+Bugalagrande 12 87
+Zarzal 17 25
